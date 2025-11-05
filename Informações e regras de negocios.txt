@@ -1,0 +1,101 @@
+--- Informações sobre o Projeto ---
+
+Nome: Sistema de Gestão de Exames Hospitalares
+
+Este projeto foi desenvolvido com o objetivo de simular o ciclo completo de um exame médico 
+— desde a solicitação feita pelo médico até a liberação do resultado para o paciente.
+
+A finalidade é demonstrar habilidades em modelagem de dados, SQL e PL/SQL, aplicadas a um 
+cenário real de gestão hospitalar, incluindo controle de autorizações, agendamentos, 
+resultados e auditoria de processos.
+
+O principal objetivo é otimizar o gerenciamento das informações de exames, garantindo 
+integridade, rastreabilidade e eficiência no fluxo de dados, além de servir como 
+portfólio técnico para demonstrar meus conhecimentos em banco de dados Oracle.
+
+__________________________________________
+
+
+Regras de Negócio
+## 🔹 1. Cadastro e entidades básicas
+
+**RB01** – Todo paciente deve possuir um cadastro ativo com dados obrigatórios: nome, CPF, data de nascimento, sexo, telefone e convênio.
+
+**RB02** – Cada paciente pertence a **um convênio**, mas pode pagar exames particulares (tipo de atendimento definido na solicitação).
+
+**RB03** – Todo médico deve estar cadastrado com nome, CRM, especialidade e status ativo.
+
+**RB04** – Todo exame deve estar cadastrado com código, nome, preço, tempo médio de realização e se **exige autorização**.
+
+**RB05** – Cada exame pertence a **uma categoria** (ex.: imagem, laboratório, cardiologia etc.).
+
+---
+
+## 🔹 2. Solicitação e autorização de exames
+
+**RB06** – A solicitação de exame é sempre gerada por um médico para um paciente.
+
+**RB07** – Cada solicitação pode conter **um ou mais exames**.
+
+**RB08** – Caso o exame **exija autorização**, o sistema deve registrar:
+
+- Data e hora da solicitação da autorização;
+- Número de protocolo da autorização;
+- Status (pendente, autorizado, negado).
+    
+    **RB09** – Se o exame for negado por **carência do convênio**, o sistema deve registrar o motivo e marcar a solicitação como **cancelada**.
+    
+    **RB10** – Após a autorização, o exame fica disponível para **agendamento**.
+    
+
+---
+
+## 🔹 3. Agendamento
+
+**RB11** – Todo agendamento deve conter: data, hora e status (agendado, realizado, cancelado).
+
+**RB12** – Um mesmo paciente pode ter **vários agendamentos** (exames distintos ou reagendamentos).
+
+**RB13** – O sistema deve validar conflito de horário (não permitir dois exames no mesmo horário e local).
+
+**RB14** – O agendamento pode ser cancelado antes da realização; o motivo deve ser informado (ausência, erro de sistema, recusa etc.).
+
+---
+
+## 🔹 4. Realização do exame
+
+**RB15** – Apenas exames **autorizados e agendados** podem ser realizados.
+
+**RB16** – O técnico responsável registra o início e término do exame, anexando observações ou ocorrências.
+
+**RB17** – Após a conclusão, o exame muda de status para **“Realizado”** e fica pendente de resultado.
+
+---
+
+## 🔹 5. Resultado e entrega
+
+**RB18** – Cada exame realizado deve possuir **um laudo associado**, emitido por um profissional habilitado (médico ou biomédico).
+
+**RB19** – O resultado pode ser composto por **texto descritivo, valores numéricos e/ou anexos (PDF, imagem)**.
+
+**RB20** – O sistema deve registrar data e hora da liberação do resultado.
+
+**RB21** – O paciente pode acessar o resultado via portal / sistema, mediante autenticação.
+
+---
+
+## 🔹 6. Faturamento e convênio (opcional / futura expansão)
+
+**RB22** – Cada exame realizado deve gerar um **registro financeiro**, vinculado ao convênio ou paciente particular.
+
+**RB23** – O sistema deve permitir cálculo do valor total considerando **percentual de cobertura do convênio**.
+
+**RB24** – Os exames cancelados **não podem ser faturados**.
+
+---
+
+## 🔹 7. Auditoria e histórico
+
+**RB25** – Toda alteração de status (solicitado → autorizado → agendado → realizado → liberado) deve ser registrada com usuário, data e hora.
+
+**RB26** – O sistema deve permitir rastrear a origem da solicitação e histórico completo do exame.
