@@ -19,3 +19,4 @@ O principal objetivo é **otimizar o gerenciamento das informações de exames**
   - [Analises sobre convenio](https://github.com/Dev-Organizada/Sistema-de-Gestao-de-Exames-Hospitalares/blob/master/consultas%20nas%20tabelas.sql)
 - Fluxos
   - [Solicitação e autorização de exames](https://github.com/Dev-Organizada/Sistema-de-Gestao-de-Exames-Hospitalares/blob/master/Solicita%C3%A7%C3%A3o%20e%20autoriza%C3%A7%C3%A3o%20de%20exames.sql)
+  - [Agendamento de exames](https://github.com/Dev-Organizada/Sistema-de-Gestao-de-Exames-Hospitalares/blob/master/Agendamento.sql)
